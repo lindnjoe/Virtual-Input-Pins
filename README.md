@@ -21,3 +21,5 @@ Use these pins like normal endstop pins:
 Change a pin state at runtime with `SET_VIRTUAL_PIN` and query it with
 `QUERY_VIRTUAL_PIN`. These pins behave like real endstop inputs, so they
 can be used anywhere an input pin is expected.
+
+Note: pins.py must replace original klipper file in klipper/klippy directory and add virtual_input_pin.py to klipper/klippy/extras folder.
