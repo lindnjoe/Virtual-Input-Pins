@@ -1,13 +1,13 @@
 # Virtual-Input-Pins
 Klipper virtual input pins
 Create virtual pins with Klipper's `virtual_input_pin` module. Define pin
-sections named `pin1` through `pin16`.
+sections:
 
 ```
 [virtual_input_pin pin1]
 [virtual_input_pin pin2]
 ...
-[virtual_input_pin pin16]
+[virtual_input_pin sensor1]
 
 ```
 
