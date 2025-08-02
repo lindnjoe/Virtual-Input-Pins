@@ -5,10 +5,12 @@ sections:
 
 ```
 [virtual_input_pin pin1]
+initial_value: 1
 [virtual_input_pin pin2]
+initial_value: 0
 ...
 [virtual_input_pin sensor1]
-
+initial_value: 0
 ```
 
 Use these pins like normal endstop pins:
