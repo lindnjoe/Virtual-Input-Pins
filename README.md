@@ -10,8 +10,7 @@ before any module that uses `virtual_pin:` pins.
 AFC_AMS1.cfg and AFC_AMS2.cfg are example AFC configs that go in
 printer_data/config/AFC.
 
-Add `[virtual_input_pin enable]` in your cfg, or create at least one virtual
-pin to enable the module.
+Create at least one virtual pin with [virtual_input_pin my_pin_name} to enable the module if not using [auto_ams_update].
 
 *It is recommended to put the sections at the top of your printer.cfg to make sure they are loaded first.*
 
