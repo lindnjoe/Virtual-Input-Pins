@@ -1,7 +1,7 @@
 import logging
 from . import virtual_input_pin
 
-SYNC_INTERVAL = 2.0
+SYNC_INTERVAL = 0.5
 
 
 class _VPinConfig:
