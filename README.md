@@ -2,8 +2,7 @@ This is an example with 2 ams units that are hooked up to indivdual tool heads. 
 
 Put auto_ams_update.py and virtual_input_pin.py in klipper/klippy/extras. The
 `virtual_input_pin` module registers its own `virtual_pin` chip when it is
-loaded, so Klipper's core `pins.py` does not need to be modified. Ensure at
-least one `[virtual_input_pin ...]` section (or `auto_ams_update`) appears
+loaded. Ensure at least one `[virtual_input_pin ...]` section (or `auto_ams_update`) appears
 before any module that uses `virtual_pin:` pins.
 
 AFC_AMS1.cfg and AFC_AMS2.cfg are example AFC configs that go in
@@ -12,6 +11,7 @@ printer_data/config/AFC.
 Add `[virtual_input_pin enable]` in your cfg, or create at least one virtual
 pin to enable the module.
 
+*It is recommended to put the sections at the top of your printer.cfg to make sure they are loaded first.*
 
 ## AMS virtual pins
 
