@@ -1,4 +1,4 @@
-This is an example with 2 ams units that are hooked up to indivdual tool heads. This is for use with AFC_klipper_addon
+This is an example with 2 ams units that are hooked up to indivdual tool heads. This is for use with AFC-Klipper-Add-On
 
 Put auto_ams_update.py and virtual_input_pin.py in klipper/klippy/extras. The
 `virtual_input_pin` module registers its own `virtual_pin` chip when it is
