@@ -1,6 +1,6 @@
 This is an example with 2 ams units that are hooked up to indivdual tool heads. This is for use with AFC-Klipper-Add-On.
 
-Each extruder that has an ams connected must be defined in AFC_Hardware.cfg. All AFC_ files go in printer_data/config/AFC.
+All extruders must be defined in AFC_Hardware.cfg. All AFC_ files go in printer_data/config/AFC.
 
 Put auto_ams_update.py and virtual_input_pin.py in klipper/klippy/extras. The
 `virtual_input_pin` module registers its own `virtual_pin` chip when it is
