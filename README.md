@@ -1,4 +1,4 @@
-This is an example with 2 ams units that are hooked up to indivdual tool heads. This is for use with AFC-Klipper-Add-On
+This is an example with 2 ams units that are hooked up to indivdual tool heads. This is for use with AFC-Klipper-Add-On.
 
 Each extruder that has an ams connected must be defined in AFC_Hardware.cfg. All AFC_ files go in printer_data/config/AFC.
 
@@ -17,7 +17,7 @@ Create at least one virtual pin with [virtual_input_pin my_pin_name} to enable t
 ## AMS virtual pins
 
 
-Use Klipper's `virtual_input_pin` module with `auto_ams_update` to
+Use this Klipper `virtual_input_pin` module with `auto_ams_update` to
 mirror AMS lane status. `auto_ams_update` will automatically create
 virtual pins for each configured AMS using the naming pattern
 `ams#lane{0-3}pl` and `ams#hub{0-3}`. List AMS objects under
