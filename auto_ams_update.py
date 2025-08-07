@@ -26,6 +26,7 @@ class _VPinConfig:
     def error(self, msg):
         raise Exception(msg)
 
+
 class AutoAMSUpdate:
     """Periodically update virtual pins from AMS lane status."""
 
@@ -43,9 +44,8 @@ class AutoAMSUpdate:
             oams_opts = sorted(oams_opts, key=sort_key)
             self.oams_names = [config.get(opt).strip() for opt in oams_opts]
         else:
-            # Default to two AMS objects for backwards compatibility
             oams_opts = []
-            self.oams_names = ['oams1', 'oams2']
+            self.oams_names = ['oams1']
         # Expect eight pins (4 lane + 4 hub) per AMS unit
         expected = 8 * len(self.oams_names)
         pins_opt = config.get('pins', None)
@@ -88,22 +88,25 @@ class AutoAMSUpdate:
                 self.printer.lookup_object('oams ' + name, None)
                 for name in self.oams_names
             ]
+
             def update_pin(name, value):
                 cmdline = f"SET_VIRTUAL_PIN PIN={name} VALUE={int(value)}"
                 self.gcode.run_script_from_command(cmdline)
+
             num = len(oams_objs)
             lane_offset = 0
             hub_offset = 4 * num
             for idx, oams in enumerate(oams_objs):
-                vals = getattr(oams, 'f1s_hes_value', [0,0,0,0]) if oams else [0,0,0,0]
-                hubs = getattr(oams, 'hub_hes_value', [0,0,0,0]) if oams else [0,0,0,0]
+                vals = getattr(oams, 'f1s_hes_value', [0, 0, 0, 0]) if oams else [0, 0, 0, 0]
+                hubs = getattr(oams, 'hub_hes_value', [0, 0, 0, 0]) if oams else [0, 0, 0, 0]
                 for i in range(4):
-                    update_pin(self.pin_names[lane_offset + idx*4 + i], vals[i])
+                    update_pin(self.pin_names[lane_offset + idx * 4 + i], vals[i])
                 for i in range(4):
-                    update_pin(self.pin_names[hub_offset + idx*4 + i], hubs[i])
+                    update_pin(self.pin_names[hub_offset + idx * 4 + i], hubs[i])
         except Exception:
             logging.exception('auto AMS update error')
         return eventtime + self.interval
+
 
 def load_config(config):
     return AutoAMSUpdate(config)
