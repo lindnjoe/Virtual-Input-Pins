@@ -1,4 +1,4 @@
-Put the pins.py file in klipper/klippy  
+Put the pins.py file in klipper/klippy replacing the original file *this will result in a "dirty" klipper install*
 Put auto_ams_update.py and virtual_input_pin.py in klipper/klippy/extras
 
 This backup is provided by [Klipper-Backup](https://github.com/Staubgeborener/klipper-backup).
