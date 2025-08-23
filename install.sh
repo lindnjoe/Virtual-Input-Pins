@@ -20,4 +20,15 @@ if ! grep -q "klippy/extras/virtual_input_pin.py" "${KLIPPER_DIR}/.git/info/excl
     echo "klippy/extras/virtual_input_pin.py" >> "${KLIPPER_DIR}/.git/info/exclude"
 fi
 
+echo "virtual_input_pin: linking klippy to auto_ams_update.py."
+
+if [ -e "${KLIPPER_DIR}/klippy/extras/auto_ams_update.py" ]; then
+    rm "${KLIPPER_DIR}/klippy/extras/auto_ams_update.py"
+fi
+ln -s "${VIRTUAL_INPUT_PIN_DIR}/auto_ams_update.py" "${KLIPPER_DIR}/klippy/extras/auto_ams_update.py"
+
+if ! grep -q "klippy/extras/auto_ams_update.py" "${KLIPPER_DIR}/.git/info/exclude"; then
+    echo "klippy/extras/auto_ams_update.py" >> "${KLIPPER_DIR}/.git/info/exclude"
+fi
+
 echo "virtual_input_pin: installation successful."
