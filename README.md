@@ -4,9 +4,11 @@ All extruders must be defined in AFC_Hardware.cfg. All AFC_ files go in printer_
 
 ## Installation
 
-Run the provided script to link the modules into your Klipper extras folder (defaulting to `~/klipper/klippy/extras`):
+Clone the repository and run the provided script to link the modules into your Klipper extras folder (defaulting to `~/klipper/klippy/extras`):
 
 ```
+git clone https://github.com/lindnjoe/Virtual-Input-Pins.git
+cd Virtual-Input-Pins
 ./install.sh
 ```
 
