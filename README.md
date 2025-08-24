@@ -4,7 +4,7 @@ All extruders must be defined in AFC_Hardware.cfg. All AFC_ files go in printer_
 
 ## Installation
 
-Run the provided script to link the modules into your Klipper checkout (defaulting to `~/klipper`):
+Run the provided script to link the modules into your Klipper extras folder (defaulting to `~/klipper/klippy/extras`):
 
 ```
 ./install.sh
