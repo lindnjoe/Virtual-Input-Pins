@@ -2,7 +2,7 @@
 
 KLIPPER_DIR="${HOME}/klipper"
 
-VIRTUAL_INPUT_PIN_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+VIRTUAL_INPUT_PIN_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit ; pwd -P )"
 
 if [ ! -d "$KLIPPER_DIR" ]; then
     echo "virtual_input_pin: klipper doesn't exist"
@@ -20,6 +20,26 @@ if ! grep -q "klippy/extras/virtual_input_pin.py" "${KLIPPER_DIR}/.git/info/excl
     echo "klippy/extras/virtual_input_pin.py" >> "${KLIPPER_DIR}/.git/info/exclude"
 fi
 
+add_auto_ams_update_section() {
+    PRINTER_CFG="${HOME}/printer.cfg"
+    if [ ! -f "${PRINTER_CFG}" ] && [ -f "${HOME}/printer_data/config/printer.cfg" ]; then
+        PRINTER_CFG="${HOME}/printer_data/config/printer.cfg"
+    fi
+
+    if [ -f "${PRINTER_CFG}" ]; then
+        if ! grep -q '^\[auto_ams_update\]' "${PRINTER_CFG}"; then
+            echo "virtual_input_pin: adding [auto_ams_update] to top of ${PRINTER_CFG}."
+            tmp_file="${PRINTER_CFG}.tmp"
+            { echo "[auto_ams_update]"; cat "${PRINTER_CFG}"; } > "${tmp_file}"
+            mv "${tmp_file}" "${PRINTER_CFG}"
+        else
+            echo "virtual_input_pin: [auto_ams_update] already present in printer.cfg."
+        fi
+    else
+        echo "virtual_input_pin: printer.cfg not found, skipping config addition."
+    fi
+}
+
 read -r -p "virtual_input_pin: install auto_ams_update.py? [y/N] " AUTO_AMS_CHOICE
 if [[ "${AUTO_AMS_CHOICE}" =~ ^[Yy]$ ]]; then
     echo "virtual_input_pin: linking klippy to auto_ams_update.py."
@@ -31,6 +51,7 @@ if [[ "${AUTO_AMS_CHOICE}" =~ ^[Yy]$ ]]; then
     if ! grep -q "klippy/extras/auto_ams_update.py" "${KLIPPER_DIR}/.git/info/exclude"; then
         echo "klippy/extras/auto_ams_update.py" >> "${KLIPPER_DIR}/.git/info/exclude"
     fi
+    add_auto_ams_update_section
 else
     echo "virtual_input_pin: skipping auto_ams_update.py."
 fi
