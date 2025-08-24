@@ -20,6 +20,7 @@ if ! grep -q "klippy/extras/virtual_input_pin.py" "${KLIPPER_DIR}/.git/info/excl
     echo "klippy/extras/virtual_input_pin.py" >> "${KLIPPER_DIR}/.git/info/exclude"
 fi
 
+
 read -r -p "virtual_input_pin: install auto_ams_update.py? [y/N] " AUTO_AMS_CHOICE
 if [[ "${AUTO_AMS_CHOICE}" =~ ^[Yy]$ ]]; then
     echo "virtual_input_pin: linking klippy to auto_ams_update.py."
