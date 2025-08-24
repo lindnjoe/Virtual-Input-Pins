@@ -14,7 +14,7 @@ cd Virtual-Input-Pins
 
 The script installs `virtual_input_pin.py` and will prompt to also install `auto_ams_update.py`. `auto_ams_update` is optional; decline if you plan to define pins manually.
 
-If you install `auto_ams_update.py`, the script automatically prepends an `[auto_ams_update]` section to your `printer.cfg` when it's missing.
+If you install `auto_ams_update.py`, the script automatically prepends an `[auto_ams_update]` section to your `printer.cfg` when it's missing. Add options from example below if needed to printer.cfg section that was created.
 
 The `virtual_input_pin` module registers its own `virtual_pin` chip when it is
 loaded. Ensure at least one `[virtual_input_pin ...]` section (or `[auto_ams_update]`) appears
