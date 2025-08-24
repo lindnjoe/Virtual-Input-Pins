@@ -32,7 +32,7 @@ if [[ "${AUTO_AMS_CHOICE}" =~ ^[Yy]$ ]]; then
     if ! grep -q "klippy/extras/auto_ams_update.py" "${KLIPPER_DIR}/.git/info/exclude"; then
         echo "klippy/extras/auto_ams_update.py" >> "${KLIPPER_DIR}/.git/info/exclude"
     fi
-    # Ensure printer.cfg contains [auto_ams_update] when installing
+
     PRINTER_CFG="${HOME}/printer.cfg"
     if [ ! -f "${PRINTER_CFG}" ] && [ -f "${HOME}/printer_data/config/printer.cfg" ]; then
         PRINTER_CFG="${HOME}/printer_data/config/printer.cfg"
