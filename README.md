@@ -2,9 +2,18 @@ This is an example with 2 ams units that are hooked up to indivdual tool heads. 
 
 All extruders must be defined in AFC_Hardware.cfg. All AFC_ files go in printer_data/config/AFC.
 
-Put auto_ams_update.py and virtual_input_pin.py in klipper/klippy/extras. The
-`virtual_input_pin` module registers its own `virtual_pin` chip when it is
-loaded. Ensure at least one `[virtual_input_pin ...]` section (or `auto_ams_update`) appears
+## Installation
+
+Run the provided script to link the modules into your Klipper checkout (defaulting to `~/klipper`):
+
+```
+./install.sh
+```
+
+The script installs `virtual_input_pin.py` and will prompt to also install `auto_ams_update.py`. `auto_ams_update` is optional; decline if you plan to define pins manually.
+
+The `virtual_input_pin` module registers its own `virtual_pin` chip when it is
+loaded. Ensure at least one `[virtual_input_pin ...]` section (or `[auto_ams_update]`) appears
 before any module that uses `virtual_pin:` pins.
 
 AFC_AMS1.cfg and AFC_AMS2.cfg are example AFC configs that go in
