@@ -51,7 +51,7 @@ if [[ "${AUTO_AMS_CHOICE}" =~ ^[Yy]$ ]]; then
     if ! grep -q "klippy/extras/auto_ams_update.py" "${KLIPPER_DIR}/.git/info/exclude"; then
         echo "klippy/extras/auto_ams_update.py" >> "${KLIPPER_DIR}/.git/info/exclude"
     fi
-    add_auto_ams_update_section
+ 
 else
     echo "virtual_input_pin: skipping auto_ams_update.py."
 fi
