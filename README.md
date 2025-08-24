@@ -4,13 +4,17 @@ All extruders must be defined in AFC_Hardware.cfg. All AFC_ files go in printer_
 
 ## Installation
 
-Run the provided script to link the modules into your Klipper extras folder (defaulting to `~/klipper/klippy/extras`):
+Clone the repository and run the provided script to link the modules into your Klipper extras folder (defaulting to `~/klipper/klippy/extras`):
 
 ```
+git clone https://github.com/lindnjoe/Virtual-Input-Pins.git
+cd Virtual-Input-Pins
 ./install.sh
 ```
 
 The script installs `virtual_input_pin.py` and will prompt to also install `auto_ams_update.py`. `auto_ams_update` is optional; decline if you plan to define pins manually.
+
+If you install `auto_ams_update.py`, the script automatically prepends an `[auto_ams_update]` section to your `printer.cfg` when it's missing.
 
 The `virtual_input_pin` module registers its own `virtual_pin` chip when it is
 loaded. Ensure at least one `[virtual_input_pin ...]` section (or `[auto_ams_update]`) appears
