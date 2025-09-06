@@ -17,7 +17,7 @@ MIN_ENCODER_DIFF = 1  # Minimum encoder difference to consider movement
 FILAMENT_PATH_LENGTH_FACTOR = 1.14  # Factor for calculating filament path traversal
 MONITOR_ENCODER_LOADING_SPEED_AFTER = 2.0  # seconds
 # Poll runout and spool state once per second for faster reaction times
-MONITOR_ENCODER_PERIOD = 1.0  # seconds
+MONITOR_ENCODER_PERIOD = 2.0  # seconds
 MONITOR_ENCODER_UNLOADING_SPEED_AFTER = 2.0  # seconds
 
 
