@@ -29,6 +29,18 @@ add the following section to your printer configuration:
 [afc_openams]
 ```
 
+
+With this section enabled, hub sensors can be sourced from OpenAMS just like
+lane sensors. Only hubs managed by OpenAMS should omit `switch_pin`; physical
+units such as BoxTurtles still require their pin definitions:
+
+```cfg
+[AFC_hub Hub_1]
+# switch_pin omitted when using OpenAMS-provided hub
+
+[AFC_hub Hub_Turtle]
+switch_pin: ^turtle_1:PA1  # physical hub still declares its pin
+=======
 With this section enabled, hub sensors are synced from OpenAMS just like lane
 sensors—no physical `switch_pin` entries are needed in your `[AFC_hub]`
 sections:
@@ -36,7 +48,7 @@ sections:
 ```cfg
 [AFC_hub Hub_1]
 # switch_pin omitted when using OpenAMS
-```
+
 
 Additional options such as the polling `interval` or extra `oams` instances can
 be specified if required.
