@@ -4,6 +4,7 @@
 #
 
 import json
+import logging
 import re
 import traceback
 from configfile import error
@@ -41,7 +42,19 @@ class State:
     MOVING_LANE     = "Moving"
     RESTORING_POS   = "Restoring"
 
+class AFCOpenAMS:
+    """Configuration wrapper for OpenAMS integration."""
+
+    def __init__(self, config):
+        printer = config.get_printer()
+        afc_obj = printer.lookup_object('AFC')
+        afc_obj.configure_openams(config)
+
+
 def load_config(config):
+    name = config.get_name().split()[0]
+    if name == 'afc_openams':
+        return AFCOpenAMS(config)
     return afc(config)
 
 class afc:
@@ -92,6 +105,13 @@ class afc:
         self.monitoring = False
         self.number_of_toolchanges  = 0
         self.current_toolchange     = 0
+
+        # OpenAMS integration
+        self.openams_enabled = False
+        self.openams_names = []
+        self.openams_timer = None
+        self._openams_lane_values = []
+        self._openams_hub_values = []
 
         # tool position when tool change was requested
         self.change_tool_pos = None
@@ -281,6 +301,62 @@ class afc:
     def register_config_callback(self, option):
         # Function needed for virtual pins, does nothing
         return
+
+    def configure_openams(self, cfg):
+        """Enable OpenAMS integration using the provided config section."""
+        self.openams_interval = cfg.getfloat('interval', 1.0, above=0.0)
+        oams_opts = cfg.get_prefix_options('oams')
+        if oams_opts:
+            def sort_key(opt):
+                suffix = opt[4:]
+                return int(suffix) if suffix.isdigit() else opt
+            oams_opts = sorted(oams_opts, key=sort_key)
+            self.openams_names = [cfg.get(opt).strip() for opt in oams_opts]
+        else:
+            self.openams_names = ['oams1']
+        self.openams_enabled = True
+        self.openams_timer = self.reactor.register_timer(self._openams_sync_event)
+        self.printer.register_event_handler('klippy:ready', self._openams_handle_ready)
+
+    def _openams_handle_ready(self, eventtime=None):
+        if self.openams_timer is not None:
+            self.reactor.update_timer(self.openams_timer, self.reactor.NOW)
+
+    def _openams_sync_event(self, eventtime):
+        try:
+            oams_objs = [
+                self.printer.lookup_object('oams ' + name, None)
+                for name in self.openams_names
+            ]
+            lane_vals = []
+            hub_vals = []
+            for oams in oams_objs:
+                lane_vals.extend(getattr(oams, 'f1s_hes_value', [0, 0, 0, 0]) if oams else [0, 0, 0, 0])
+                hub_vals.extend(getattr(oams, 'hub_hes_value', [0, 0, 0, 0]) if oams else [0, 0, 0, 0])
+            now = self.reactor.monotonic()
+            lane_objs = list(self.lanes.values())
+            for i, val in enumerate(lane_vals):
+                if i >= len(lane_objs):
+                    break
+                if i >= len(self._openams_lane_values):
+                    self._openams_lane_values.append(None)
+                if self._openams_lane_values[i] != val:
+                    lane = lane_objs[i]
+                    lane.prep_callback(now, bool(val))
+                    lane.load_callback(now, bool(val))
+                    self._openams_lane_values[i] = val
+            hub_objs = list(self.hubs.values())
+            for i, val in enumerate(hub_vals):
+                if i >= len(hub_objs):
+                    break
+                if i >= len(self._openams_hub_values):
+                    self._openams_hub_values.append(None)
+                if self._openams_hub_values[i] != val:
+                    hub_objs[i].switch_pin_callback(now, bool(val))
+                    self._openams_hub_values[i] = val
+        except Exception:
+            logging.exception('OpenAMS sync error')
+        return eventtime + self.openams_interval
 
     def register_lane_macros(self, lane_obj):
         """
