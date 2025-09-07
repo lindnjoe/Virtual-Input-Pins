@@ -24,7 +24,7 @@ If your directory structure differs, you can configure the installation script w
 
 To relay OpenAMS sensor states into the [AFC Klipper Add-On](../AFC-Klipper-Add-On-direct_update),
 enable synchronization by adding an `[afc_openams]` section to your
-`printer.cfg`, then define your AMS units with `[AFC_AMS]` blocks mapping to
+`printer.cfg`, then define your AMS units with `[afc_ams]` blocks mapping to
 each OpenAMS instance. The `[afc_openams]` section may include an optional
 polling `interval` (defaults to `2.0` seconds):
 
@@ -32,7 +32,7 @@ polling `interval` (defaults to `2.0` seconds):
 [afc_openams]
 ; interval: 2.0  # optional polling interval in seconds
 
-[AFC_AMS AMS_1]
+[afc_ams AMS_1]
 oams: oams1
 ```
 
@@ -49,8 +49,8 @@ switch_pin: ^turtle_1:PA1  # physical hub still declares its pin
 ```
 
 Additional options such as the polling `interval` should be set in the
-first `[AFC_AMS]` section, while extra OpenAMS units are added with
-additional `[AFC_AMS]` sections specifying their `oams` names.
+first `[afc_ams]` section, while extra OpenAMS units are added with
+additional `[afc_ams]` sections specifying their `oams` names.
 
 ## Credits
 
