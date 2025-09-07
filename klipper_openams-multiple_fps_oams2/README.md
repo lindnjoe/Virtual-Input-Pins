@@ -26,11 +26,11 @@ To relay OpenAMS sensor states into the [AFC Klipper Add-On](../AFC-Klipper-Add-
 enable synchronization by adding an `[afc_openams]` section to your
 `printer.cfg`, then define your AMS units with `[AFC_AMS]` blocks mapping to
 each OpenAMS instance. The `[afc_openams]` section may include an optional
-polling `interval`:
+polling `interval` (defaults to `2.0` seconds):
 
 ```cfg
 [afc_openams]
-; interval: 1.0  # optional polling interval in seconds
+; interval: 2.0  # optional polling interval in seconds
 
 [AFC_AMS AMS_1]
 oams: oams1
