@@ -2213,3 +2213,11 @@ class afc:
         self.logger.error("Test Message 1")
         self.logger.error("Test Message 2")
         self.logger.error("Test Message 3")
+
+
+class AFCOpenAMS(afc):
+    """AFC wrapper that enables OpenAMS synchronization."""
+
+    def __init__(self, config):
+        super().__init__(config)
+        self.configure_openams(config)

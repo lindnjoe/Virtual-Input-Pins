@@ -10,11 +10,11 @@ using [OpenAMS](https://github.com/lindnjoe/OpenAMS) with the
    `klipper/klippy/extras/` directory.
 2. Place `AFC_AMS1.cfg` and `AFC_AMS2.cfg` (or your customized versions) in
    `printer_data/config/AFC/`.
-3. Define each AMS using an `[AFC_AMS AMS_X]` section. The first AMS
-   enables synchronization with OpenAMS and may specify an optional
-   `interval` setting for the polling frequency.
-4. Map the AMS to its OpenAMS instance with `oams: oamsX` within each
-   `[AFC_AMS AMS_X]` block.
+3. Enable OpenAMS synchronization by adding an `[afc_openams]` section.
+   It may include an optional `interval` setting for the polling
+   frequency.
+4. Define each AMS using an `[AFC_AMS AMS_X]` section and map it to its
+   OpenAMS instance with `oams: oamsX`.
 
 The legacy `virtual_input_pin.py` and `auto_ams_update.py` modules are no longer
 required and have been removed from this project.

@@ -23,13 +23,16 @@ If your directory structure differs, you can configure the installation script w
 ## AFC Integration
 
 To relay OpenAMS sensor states into the [AFC Klipper Add-On](../AFC-Klipper-Add-On-direct_update),
-define your first AMS using an `[AFC_AMS]` section. This will enable
-OpenAMS synchronization and may include an optional `interval` setting
-for the polling frequency:
+first add an `[afc_openams]` section to enable synchronization. It may
+include an optional `interval` setting for the polling frequency. Then
+define your AMS units with `[AFC_AMS]` blocks mapping to each OpenAMS
+instance:
 
 ```cfg
-[AFC_AMS AMS_1]
+[afc_openams]
 # interval: 1.0  # optional polling interval in seconds
+
+[AFC_AMS AMS_1]
 oams: oams1
 ```
 
@@ -45,9 +48,9 @@ physical units such as BoxTurtles still require their pin definitions:
 switch_pin: ^turtle_1:PA1  # physical hub still declares its pin
 ```
 
-Additional options such as the polling `interval` should be set in the first
-`[AFC_AMS]` section, while extra OpenAMS units are added with additional
-`[AFC_AMS]` sections specifying their `oams` names.
+Additional options such as the polling `interval` should be set in the
+`[afc_openams]` section, while extra OpenAMS units are added with
+additional `[AFC_AMS]` sections specifying their `oams` names.
 
 ## Credits
 
