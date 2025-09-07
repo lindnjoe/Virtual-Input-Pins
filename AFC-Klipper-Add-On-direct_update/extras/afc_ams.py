@@ -29,3 +29,7 @@ class afcAMS(afcBoxTurtle):
 
 def load_config_prefix(config):
     return afcAMS(config)
+
+
+def load_config(config):
+    return afcAMS(config)
