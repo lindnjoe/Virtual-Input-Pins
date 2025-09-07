@@ -11,8 +11,8 @@ using [OpenAMS](https://github.com/lindnjoe/OpenAMS) with the
 2. Place `AFC_AMS1.cfg` and `AFC_AMS2.cfg` (or your customized versions) in
    `printer_data/config/AFC/`.
 3. Enable OpenAMS synchronization by adding an `[afc_openams]` section to your
-   `printer.cfg`. An optional `interval` may be specified for the polling
-   frequency (defaults to `2.0` seconds).
+   `printer.cfg` *before* any `[afc_ams]` blocks. An optional `interval` may be
+   specified for the polling frequency (defaults to `2.0` seconds).
 4. Define each AMS using an `[afc_ams AMS_X]` section and map it to its
    OpenAMS instance with `oams: oamsX`.
    The first AMS block may include an optional `interval` setting for the
