@@ -76,14 +76,24 @@ import { Component, Mixins, Prop } from 'vue-property-decorator'
 import BaseMixin from '@/components/mixins/base'
 import SettingsRow from '@/components/settings/SettingsRow.vue'
 import StartPrintDialogAfc from '@/components/dialogs/StartPrintDialogAfc.vue'
+
+
 import StartPrintDialogSpoolman from '@/components/dialogs/StartPrintDialogSpoolman.vue'
+
 import { FileStateGcodefile } from '@/store/files/types'
 import { ServerSpoolmanStateSpool } from '@/store/server/spoolman/types'
 import { mdiPrinter3d } from '@mdi/js'
 import { defaultBigThumbnailBackground, thumbnailBigMin } from '@/store/variables'
 
 @Component({
+
+
+
   components: { SettingsRow, StartPrintDialogAfc, StartPrintDialogSpoolman },
+
+  components: { SettingsRow, StartPrintDialogAfc },
+
+
 })
 export default class StartPrintDialog extends Mixins(BaseMixin) {
   mdiPrinter3d = mdiPrinter3d
