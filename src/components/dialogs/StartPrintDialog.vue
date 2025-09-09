@@ -132,7 +132,7 @@ export default class StartPrintDialog extends Mixins(BaseMixin) {
   }
 
   get active_spool(): ServerSpoolmanStateSpool | null {
-    return this.$store.state.server.spoolman.active_spool ?? null
+    return this.$store.state.server.spoolman?.active_spool ?? null
   }
   get filamentVendor() {
     return this.active_spool?.filament?.vendor?.name ?? 'Unknown'
